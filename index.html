@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yomimon 메타 광고 대시보드</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .energy-fill { transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .ad-row-anim { transition: all 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex flex-col custom-scrollbar">
+
+    <!-- 토스트 알림 -->
+    <div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full"></div>
+
+    <!-- 리셋 확인 모달 -->
+    <div id="confirmModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="flex items-center space-x-3 text-amber-500 mb-4"><i data-lucide="alert-triangle" class="w-6 h-6"></i><h3 class="text-lg font-bold text-slate-800">기준점 리셋 확인</h3></div>
+            <p id="confirmMessage" class="text-sm text-slate-600 mb-6 leading-relaxed"></p>
+            <div class="flex justify-end space-x-3">
+                <button onclick="closeConfirmModal(false)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-sm font-medium">취소</button>
+                <button onclick="closeConfirmModal(true)" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium">리셋 실행</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 분석 AI 리포트 모달 -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-5">
+                <div>
+                    <h3 id="detailTitle" class="text-xl font-extrabold text-slate-800 flex items-center gap-2"><i data-lucide="bar-chart-2" class="w-6 h-6 text-blue-600"></i> 상세 분석 리포트</h3>
+                    <p id="detailSubtitle" class="text-xs text-slate-400 mt-1">세부 지표 시각화 및 AI 진단</p>
+                </div>
+                <button onclick="closeDetailModal()" class="text-slate-400 hover:text-slate-600 p-2 bg-slate-50 hover:bg-slate-100 rounded-full transition-colors"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col items-center justify-center min-h-[250px]">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 w-full text-center">종합 퍼포먼스 밸런스</h4>
+                    <canvas id="radarChart" class="w-full max-w-[250px]"></canvas>
+                </div>
+                <div class="flex flex-col gap-3 justify-center">
+                    <div id="detailEvalWrap" class="p-4 rounded-2xl border flex items-center justify-between shadow-sm transition-colors duration-300">
+                        <div>
+                            <p class="text-[11px] font-bold uppercase mb-1 text-slate-500">성과 종합 평가</p>
+                            <p id="detailEvalText" class="text-2xl font-black tracking-tight">평가 중</p>
+                        </div>
+                        <div id="detailEvalIcon" class="text-4xl drop-shadow-md">🤔</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100 mt-1">
+                        <p class="text-[11px] font-bold text-blue-600 uppercase mb-1">총 전환 매출 (Revenue)</p>
+                        <p id="detailRev" class="text-2xl font-black text-slate-800">0원</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="flex-1 bg-white p-4 rounded-2xl border border-slate-200">
+                            <p class="text-[11px] font-bold text-slate-400 uppercase mb-1">지출액</p>
+                            <p id="detailSpend" class="text-lg font-bold text-slate-700">0원</p>
+                        </div>
+                        <div class="flex-1 bg-slate-50 p-4 rounded-2xl border border-slate-200" id="detailRoasBox">
+                            <p class="text-[11px] font-bold uppercase mb-1" id="detailRoasLabel">ROAS</p>
+                            <p id="detailRoas" class="text-lg font-black">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-5 shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10"><i data-lucide="bot" class="w-24 h-24 text-white"></i></div>
+                <h4 class="text-white font-extrabold text-sm flex items-center gap-2 mb-3 relative z-10">✨ 마케팅 자동 진단 및 시점 제안</h4>
+                <div id="aiCommentBox" class="bg-white/10 backdrop-blur-md rounded-xl p-4 text-white/95 text-[13px] leading-relaxed relative z-10 font-medium tracking-tight">데이터 분석 중...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 소재 미리보기 등록 모달 -->
+    <div id="urlPromptModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center space-x-2 text-emerald-600"><i data-lucide="link" class="w-5 h-5"></i><h3 class="text-lg font-bold text-slate-800">소재 미리보기 URL 등록</h3></div>
+                <button onclick="closeUrlPromptModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">등록된 링크가 없습니다. 공유 링크를 붙여넣으시면 내 기기(또는 클라우드)에 영구 저장됩니다.</p>
+            <input type="hidden" id="targetAdIdForUrl">
+            <input type="text" id="singleUrlInput" placeholder="https://www.instagram.com/p/..." class="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500/20 text-sm font-mono mb-5">
+            <button onclick="submitSingleUrl()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-md">저장 및 열기</button>
+        </div>
+    </div>
+
+    <!-- 광고 소재 URL DB 관리 모달 -->
+    <div id="dbModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col h-[85vh]">
+            <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-4 shrink-0">
+                <div>
+                    <h3 class="text-xl font-extrabold text-slate-800 flex items-center gap-2"><i data-lucide="database" class="w-6 h-6 text-indigo-600"></i> 광고 소재 URL DB 관리소</h3>
+                    <p class="text-xs text-slate-400 mt-1">로드된 모든 소재의 URL을 일괄 관리하고 클라우드에 저장합니다.</p>
+                </div>
+                <button onclick="closeDbModal()" class="text-slate-400 hover:text-slate-600 p-2 bg-slate-50 hover:bg-slate-100 rounded-full"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div class="overflow-y-auto flex-1 custom-scrollbar border border-slate-200 rounded-xl">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-100 sticky top-0 shadow-sm">
+                        <tr><th class="p-3 font-bold text-slate-600 w-1/3 border-b border-slate-200">광고 소재 이름 (Ad Name)</th><th class="p-3 font-bold text-slate-600 w-2/3 border-b border-slate-200">수동 연결 URL</th></tr>
+                    </thead>
+                    <tbody id="dbTableBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+            </div>
+            <div class="pt-4 shrink-0 flex justify-end">
+                <button onclick="saveAllUrls()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-md flex items-center gap-2"><i data-lucide="save" class="w-4 h-4"></i> 로컬 일괄 저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 데이터센터 백업 성공 안내 팝업 -->
+    <div id="successPopupModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 text-center">
+            <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="check-circle" class="w-8 h-8 text-emerald-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">데이터 백업 완료!</h3>
+            <p class="text-sm text-slate-500 mb-6">팀 구글 시트(DB)에 안전하게 누적되었습니다.</p>
+            <div class="flex gap-2">
+                <button onclick="closeSuccessPopup()" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-sm font-bold transition-all">닫기</button>
+                <button onclick="openGoogleSheet()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-md transition-all flex items-center justify-center gap-1">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> 데이터 엑셀시트 가기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 헤더 영역 -->
+    <header class="gradient-bg text-white px-6 py-5 shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center space-x-3.5">
+            <div class="p-1 bg-white/10 rounded-2xl backdrop-blur-md border border-white/20"><img src="data:image/png;base64,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" class="w-12 h-12 rounded-xl object-cover"></div>
+            <div>
+                <h1 class="text-xl font-extrabold tracking-tight flex items-center gap-2">
+                    Yomimon 메타 광고 대시보드
+                    <span class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-mono font-medium">CEO Report V29</span>
+                </h1>
+                <p class="text-xs text-slate-300 mt-0.5"><b>클라우드 자동 복원</b> 적용 — 어느 컴퓨터에서 열어도 팀 데이터 자동 동기화</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button onclick="openDbModal()" class="bg-indigo-500/20 text-indigo-200 border border-indigo-500/40 hover:bg-indigo-500/30 px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all"><i data-lucide="database" class="w-3.5 h-3.5"></i> 광고 DB 관리</button>
+            <button onclick="toggleDemoMode()" id="demoToggleBtn" class="bg-amber-500/15 text-amber-300 border border-amber-500/40 hover:bg-amber-500/25 px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i> 시연 모드</button>
+        </div>
+    </header>
+
+    <!-- 메인 대시보드 구조 -->
+    <main class="flex-1 max-w-[1600px] w-full mx-auto p-4 md:p-6 space-y-6">
+        
+        <!-- 설정 및 데이터센터 연동 섹션 -->
+        <section class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-6">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <h2 class="font-bold text-slate-800 flex items-center gap-2"><i data-lucide="server" class="w-5 h-5 text-blue-600"></i> 데이터센터 및 연동 설정</h2>
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="saveCreds" class="rounded border-slate-300 text-blue-600">
+                    <label for="saveCreds" class="text-xs text-slate-500 font-medium">내 정보 기기 보관</label>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Meta 계정 ID</label>
+                    <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono font-medium">act_</span><input type="text" id="accountId" class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500/20 text-xs font-mono"></div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Meta 액세스 토큰</label>
+                    <div class="relative"><input type="password" id="accessToken" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500/20 text-xs font-mono"><button onclick="toggleTokenVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"><i id="tokenEyeIcon" data-lucide="eye" class="w-3.5 h-3.5"></i></button></div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-emerald-600 uppercase mb-2">📝 이력 담당자</label>
+                    <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="user" class="w-3.5 h-3.5"></i></span><input type="text" id="picName" value="박 주임" class="w-full pl-8 pr-3 py-2.5 rounded-xl border border-emerald-200 bg-emerald-50/50 focus:ring-2 focus:ring-emerald-500/20 text-xs font-bold text-slate-700"></div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-blue-600 uppercase mb-2">📅 데이터 기간</label>
+                    <div class="relative">
+                        <select id="datePreset" class="w-full pl-3 pr-8 py-2.5 rounded-xl border border-blue-200 bg-blue-50/50 focus:ring-2 focus:ring-blue-500/20 text-xs font-bold text-slate-700 appearance-none cursor-pointer">
+                            <option value="today">오늘</option><option value="yesterday">어제</option><option value="last_3d">최근 3일</option>
+                            <option value="last_7d" selected>최근 7일</option><option value="this_month">이번 달</option><option value="maximum">전체 기간</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-blue-500"><i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></div>
+                    </div>
+                </div>
+                <div class="col-span-2 flex flex-col gap-3 justify-end">
+                    <!-- 클라우드 연동 상태 표시 -->
+                    <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="database" class="w-3.5 h-3.5 text-slate-400"></i>
+                            <span class="text-[11px] font-semibold text-slate-500">팀 데이터센터</span>
+                        </div>
+                        <div id="cloudStatusBadge" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border">
+                            <span id="cloudStatusDot" class="w-2 h-2 rounded-full"></span>
+                            <span id="cloudStatusText"></span>
+                        </div>
+                    </div>
+                    <!-- hidden input (기존 로직 유지용) -->
+                    <input type="text" id="cloudUrl" class="hidden">
+                    <!-- 버튼 2개 -->
+                    <div class="flex gap-2">
+                        <button onclick="forceSaveToCloud()"
+                            class="flex-1 group relative overflow-hidden py-2.5 rounded-xl text-[11px] font-bold transition-all duration-200
+                                   bg-white border border-slate-200 text-slate-600 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 hover:shadow-sm
+                                   flex items-center justify-center gap-1.5"
+                            title="현재 데이터를 팀 클라우드로 전송">
+                            <i data-lucide="upload-cloud" class="w-3.5 h-3.5"></i> 데이터 전송
+                        </button>
+                        <button onclick="fetchData()"
+                            class="flex-1 py-2.5 rounded-xl text-[11px] font-bold transition-all duration-200
+                                   bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white shadow-sm hover:shadow-md
+                                   flex items-center justify-center gap-1.5"
+                            title="Meta API에서 최신 광고 데이터를 불러옵니다">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 메타 최신화
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 데이터 리스트 메인 섹션 -->
+        <section class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden flex flex-col">
+            <div class="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="font-extrabold text-slate-800 text-lg flex items-center gap-2">
+                        <i data-lucide="bar-chart-2" class="w-5 h-5 text-blue-600"></i> 마케팅 인사이트 및 예산 이력 보고판
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">지표 탭에 <strong>구매건수와 단가(CPP)</strong>가 함께 표시됩니다. 예산은 수학적 차이로 정확히 기록됩니다.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    
+                    <button onclick="resetBaseline()" class="p-2.5 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-xl transition-colors flex items-center gap-1.5 border border-transparent hover:border-amber-200" title="현재 예산을 기준으로 이력을 리셋">
+                        <i data-lucide="history" class="w-4 h-4"></i><span class="text-[11px] font-bold">이력 초기화</span>
+                    </button>
+                    <span id="loadingStatus" class="text-xs text-slate-400 hidden items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping"></span> 연동 중...</span>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full text-left border-collapse min-w-[1250px]">
+                    <thead>
+                        <tr class="bg-slate-50/70 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100">
+                            <th class="px-5 py-4 w-12 text-center">분류</th>
+                            <th class="px-5 py-4 w-72">캠페인 / 세트 / 소재 정보</th>
+                            <th class="px-5 py-4 w-40 border-x border-slate-100 bg-slate-50/90">💰 성과 (지출/매출/ROAS)</th>
+                            <th class="px-5 py-4 w-36">📊 지표 (CPM/CTR/구매)</th>
+                            <th class="px-5 py-4 w-44 border-x border-slate-100 bg-slate-50/90 text-center">🔋 영상 쌩쌩함 (피로도)</th>
+                            <th class="px-5 py-4 w-32 text-center">현재 일일 예산</th>
+                            <th class="px-5 py-4 w-64 bg-slate-100/50 text-center border-l border-slate-100">📝 예산 변경 이력</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody" class="divide-y divide-slate-100 text-sm">
+                        <tr><td colspan="7" class="px-6 py-24 text-center text-slate-400"><div class="flex flex-col items-center"><span class="text-4xl mb-3">👔</span><p class="font-bold text-slate-600">보고용 데이터가 비어 있습니다.</p><p class="text-xs mt-1">[메타 최신화]를 누르시면 데이터센터 기준 최신 변경 내역을 계산합니다.</p></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let state = {
+            isDemo: false, campaigns: [], adsets: [], ads: [], 
+            baseline: {}, historyLog: {}, manualUrls: {}, confirmCallback: null
+        };
+
+        // ★ 팀 공용 구글 앱스 스크립트 URL (하드코딩 — 변경 금지)
+        const TEAM_CLOUD_URL = "https://script.google.com/macros/s/AKfycbx4Ee2s4gVaHIRa_TCY4znhzJkgGZoAxXqr0cj8qkFTaUtp0nwBfnizDNOUR1OyAbg/exec";
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            lucide.createIcons();
+            loadCredentials();
+
+            // 클라우드 URL 입력칸에 팀 공용 URL 자동 세팅
+            const cloudInput = document.getElementById('cloudUrl');
+            if (!cloudInput.value.trim()) cloudInput.value = TEAM_CLOUD_URL;
+
+            // 로컬 데이터 우선 로드
+            state.baseline  = JSON.parse(localStorage.getItem('yomimon_v27_baseline') || '{}');
+            state.historyLog = JSON.parse(localStorage.getItem('yomimon_v27_history') || '{}');
+            state.manualUrls = JSON.parse(localStorage.getItem('yomimon_v27_urls') || '{}');
+            checkCloudStatus();
+
+            // ★ 자동 클라우드 복원 — 로컬에 baseline 데이터가 없을 때(새 컴퓨터 등)만 실행
+            const isLocalEmpty = Object.keys(state.baseline).length === 0;
+            if (isLocalEmpty) {
+                showToast("새 기기 감지 — 팀 클라우드에서 데이터 복원 중...", "info");
+                try {
+                    const res = await fetch(TEAM_CLOUD_URL);
+                    const data = await res.json();
+                    if (data && data.status === 'ok') {
+                        if (data.baseline)   state.baseline   = data.baseline;
+                        if (data.historyLog) state.historyLog = data.historyLog;
+                        if (data.manualUrls) state.manualUrls = data.manualUrls;
+                        localStorage.setItem('yomimon_v27_baseline', JSON.stringify(state.baseline));
+                        localStorage.setItem('yomimon_v27_history',  JSON.stringify(state.historyLog));
+                        localStorage.setItem('yomimon_v27_urls',     JSON.stringify(state.manualUrls));
+                        showToast("✅ 팀 클라우드 자동 복원 완료! [메타 최신화]를 눌러주세요.", "success");
+                    } else {
+                        showToast("클라우드에 저장 데이터 없음 — 처음 사용 중이신가요?", "warning");
+                    }
+                } catch(e) {
+                    showToast("클라우드 자동 복원 실패 (수동 [내려받기] 를 이용해주세요)", "error");
+                }
+            }
+        });
+
+        // ================= UI 및 모달 =================
+        function showToast(msg, type='success') {
+            const container = document.getElementById('toastContainer'); const t = document.createElement('div');
+            const col = type==='success'?'emerald':type==='error'?'rose':'amber', ico = type==='success'?'check-circle':type==='error'?'x-circle':'alert-circle';
+            t.className = `flex items-center p-4 rounded-2xl shadow-lg border text-sm transition-all duration-300 transform translate-y-2 opacity-0 bg-${col}-50 border-${col}-200 text-${col}-800`;
+            t.innerHTML = `<div class="flex items-center space-x-3 w-full"><i data-lucide="${ico}" class="w-5 h-5 flex-shrink-0"></i><p class="font-medium">${msg}</p></div>`;
+            container.appendChild(t); lucide.createIcons();
+            setTimeout(() => t.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => { t.classList.add('translate-y-2', 'opacity-0'); setTimeout(() => t.remove(), 300); }, 3500);
+        }
+
+        function showConfirm(msg, cb) { state.confirmCallback = cb; document.getElementById('confirmMessage').innerText = msg; document.getElementById('confirmModal').classList.remove('hidden'); setTimeout(() => { document.getElementById('confirmModal').classList.remove('opacity-0'); document.getElementById('confirmModal').querySelector('div').classList.remove('scale-95'); }, 10); }
+        function closeConfirmModal(appr) { document.getElementById('confirmModal').classList.add('opacity-0'); document.getElementById('confirmModal').querySelector('div').classList.add('scale-95'); setTimeout(() => { document.getElementById('confirmModal').classList.add('hidden'); if(appr && state.confirmCallback) state.confirmCallback(); state.confirmCallback=null; }, 300); }
+
+        async function checkCloudStatus() {
+            const badge = document.getElementById('cloudStatusBadge');
+            const dot   = document.getElementById('cloudStatusDot');
+            const txt   = document.getElementById('cloudStatusText');
+            // 로딩 상태
+            badge.className = 'flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border bg-slate-100 text-slate-400 border-slate-200';
+            dot.className   = 'w-2 h-2 rounded-full bg-slate-300 animate-pulse';
+            txt.textContent = '확인 중...';
+            try {
+                const res  = await fetch(TEAM_CLOUD_URL, { signal: AbortSignal.timeout(5000) });
+                const data = await res.json();
+                badge.className = 'flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-50 text-emerald-700 border-emerald-300';
+                dot.className   = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+                txt.textContent = '연동 중';
+            } catch(e) {
+                badge.className = 'flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border bg-red-50 text-red-600 border-red-200';
+                dot.className   = 'w-2 h-2 rounded-full bg-red-500';
+                txt.textContent = '이상 있음';
+            }
+        }
+
+        // ================= 수동 클라우드 로직 =================
+        async function restoreFromCloud() {
+            const cloudUrl = document.getElementById('cloudUrl').value.trim() || TEAM_CLOUD_URL;
+            if(!cloudUrl) { showToast("데이터센터 연결 URL을 먼저 기입해주세요.", "warning"); return; }
+            showToast("클라우드 데이터를 불러오는 중...", "info");
+            try {
+                const res = await fetch(cloudUrl); const data = await res.json();
+                if(data && data.status === 'ok') {
+                    if(data.baseline) state.baseline = data.baseline;
+                    if(data.historyLog) state.historyLog = data.historyLog;
+                    if(data.manualUrls) state.manualUrls = data.manualUrls;
+                    localStorage.setItem('yomimon_v27_baseline', JSON.stringify(state.baseline));
+                    localStorage.setItem('yomimon_v27_history', JSON.stringify(state.historyLog));
+                    localStorage.setItem('yomimon_v27_urls', JSON.stringify(state.manualUrls));
+                    renderTable();
+                    showToast("클라우드 이력 복원 성공! (이제 메타 최신화를 눌러주세요)", "success");
+                } else { showToast("클라우드에 저장된 데이터가 없습니다.", "warning"); }
+            } catch(e) { showToast("클라우드 로드 실패", "error"); }
+        }
+
+        // 구글 시트 엑셀화를 위해 데이터를 행/열(Array) 구조로 포장하는 함수
+        function buildDbPayload() {
+            const now = new Date().toLocaleString('ko-KR', { month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+            const pic = document.getElementById('picName').value.trim() || '담당자 미상';
+            let rows = [];
+            const fmtNum = (n) => parseInt(n).toLocaleString();
+
+            const getMetrics = (item, id) => {
+                const ins = item.insights?.data?.[0];
+                const curBud = item.daily_budget ? parseInt(item.daily_budget) : 0;
+                
+                const logs = state.historyLog[id] || [];
+                let diffText = "-";
+                if (logs.length > 0) {
+                    if(logs[0].diff > 0) diffText = `▲ +${fmtNum(logs[0].diff)}원`;
+                    else if(logs[0].diff < 0) diffText = `▼ -${fmtNum(Math.abs(logs[0].diff))}원`;
+                    else if(logs[0].diff === 0 && logs[0].diffText) diffText = logs[0].diffText;
+                }
+
+                let spend = 0, rev = 0, roas = 0, cpm = 0, ctr = 0, purchases = 0, cpp = 0;
+                if(ins) {
+                    spend = parseInt(ins.spend || 0);
+                    if(ins.action_values) { const pur = ins.action_values.find(v => v.action_type === 'omni_purchase' || v.action_type === 'purchase'); if(pur) rev = parseInt(pur.value); }
+                    if(ins.actions) { const purAct = ins.actions.find(a => a.action_type === 'omni_purchase' || a.action_type === 'purchase'); if(purAct) purchases = parseInt(purAct.value); }
+                    roas = spend > 0 ? ((rev/spend)*100).toFixed(0) : 0;
+                    cpm = parseFloat(ins.cpm || 0);
+                    ctr = parseFloat(ins.ctr || 0);
+                    cpp = purchases > 0 ? Math.round(spend / purchases) : 0;
+                }
+
+                return {
+                    budget: curBud > 0 ? `${fmtNum(curBud)}원` : "-", diffText: diffText,
+                    spend: spend, rev: rev, roas: roas + "%", cpm: Math.round(cpm), ctr: ctr.toFixed(2) + "%", purchases: purchases, cpp: cpp > 0 ? `${fmtNum(cpp)}원` : "-"
+                };
+            };
+
+            state.campaigns.forEach(c => {
+                const m = getMetrics(c, c.id);
+                rows.push([now, "캠페인", c.name, m.budget, m.diffText, m.spend, m.rev, m.roas, m.cpm, m.ctr, m.purchases, m.cpp, pic]);
+                const relAdsets = state.adsets.filter(a => a.campaign_id === c.id);
+                relAdsets.forEach(a => {
+                    const am = getMetrics(a, a.id);
+                    rows.push([now, "세트", ` ㄴ ${a.name}`, am.budget, am.diffText, am.spend, am.rev, am.roas, am.cpm, am.ctr, am.purchases, am.cpp, pic]);
+                    const relAds = state.ads.filter(ad => ad.adset_id === a.id);
+                    relAds.forEach(ad => {
+                        const adm = getMetrics(ad, ad.id);
+                        rows.push([now, "소재", `    ㄴ ${ad.name}`, adm.budget, adm.diffText, adm.spend, adm.rev, adm.roas, adm.cpm, adm.ctr, adm.purchases, adm.cpp, pic]);
+                    });
+                });
+            });
+            return rows;
+        }
+
+        // 백업 성공 팝업창 제어용 함수
+        function openGoogleSheet() {
+            window.open('https://docs.google.com/spreadsheets/d/16OaXMhH4XWcAp05scUY6-J9clYmwrMKfWBl6Ljl8Vlg/edit', '_blank');
+            closeSuccessPopup();
+        }
+
+        function showSuccessPopup() {
+            document.getElementById('successPopupModal').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('successPopupModal').classList.remove('opacity-0');
+                document.getElementById('successPopupModal').querySelector('div').classList.remove('scale-95');
+            }, 10);
+            lucide.createIcons();
+        }
+
+        function closeSuccessPopup() {
+            document.getElementById('successPopupModal').classList.add('opacity-0');
+            document.getElementById('successPopupModal').querySelector('div').classList.add('scale-95');
+            setTimeout(() => { document.getElementById('successPopupModal').classList.add('hidden'); }, 300);
+        }
+
+        async function forceSaveToCloud() {
+            const cloudUrl = document.getElementById('cloudUrl').value.trim() || TEAM_CLOUD_URL;
+            if(!cloudUrl) { showToast("데이터센터 연결 URL을 먼저 기입해주세요.", "warning"); return; }
+            showToast("데이터센터로 엑셀 DB 전송 중...", "info");
+            try { 
+                const dbRows = buildDbPayload();
+                const payloadData = {
+                    type: 'save_and_append',
+                    payload: { baseline: state.baseline, historyLog: state.historyLog, manualUrls: state.manualUrls },
+                    dbRows: dbRows
+                };
+                await fetch(cloudUrl, { method: 'POST', body: JSON.stringify(payloadData), headers: { "Content-Type": "text/plain;charset=utf-8" } }); 
+                // 백업 성공 시 팝업 열기
+                showSuccessPopup();
+            } catch(e) { showToast("클라우드 백업 실패", "error"); }
+        }
+
+        // ================= 다이렉트 링크, 팝업, 폴딩 =================
+        window.toggleAds = function(adsetId) {
+            const rows = document.querySelectorAll(`.ad-row-${adsetId}`), icon = document.getElementById(`icon-ad-${adsetId}`);
+            let isHidden = false; rows.forEach(r => { r.classList.toggle('hidden'); isHidden = r.classList.contains('hidden'); });
+            if (icon) { icon.setAttribute('data-lucide', isHidden ? 'chevron-down' : 'chevron-up'); lucide.createIcons(); }
+        };
+        
+        window.toggleHistory = function(id) {
+            const foldDiv = document.getElementById(`hist-fold-${id}`);
+            const icon = document.getElementById(`hist-icon-${id}`);
+            const btnText = document.getElementById(`hist-text-${id}`);
+            if(foldDiv.classList.contains('hidden')) {
+                foldDiv.classList.remove('hidden');
+                icon.setAttribute('data-lucide', 'chevron-up');
+                btnText.innerText = '이력 접기';
+            } else {
+                foldDiv.classList.add('hidden');
+                icon.setAttribute('data-lucide', 'chevron-down');
+                btnText.innerText = `과거 이력 ${state.historyLog[id].length - 1}건 더보기`;
+            }
+            lucide.createIcons();
+        };
+
+        function openRealAdsManager(id, type) {
+            const acc = document.getElementById('accountId').value.trim();
+            if(!acc) { showToast("계정 ID를 상단에 먼저 입력해주세요.", "warning"); return; }
+            let url = type === 'ad' ? `https://adsmanager.facebook.com/adsmanager/manage/ads/edit?act=${acc}&selected_ad_ids=${id}` : `https://adsmanager.facebook.com/adsmanager/manage/adsets/edit?act=${acc}&selected_adset_ids=${id}`;
+            window.open(url, '_blank');
+        }
+
+        function openDbModal() {
+            if(state.ads.length === 0 && !state.isDemo) { showToast("데이터를 먼저 동기화해주세요.", "warning"); return; }
+            const tbody = document.getElementById('dbTableBody'); tbody.innerHTML = '';
+            state.ads.forEach(ad => {
+                const savedUrl = state.manualUrls[ad.id] || '';
+                tbody.innerHTML += `<tr class="hover:bg-slate-50 transition-colors"><td class="p-3 border-r border-slate-100"><div class="font-bold text-slate-700 text-xs">${ad.name}</div><div class="text-[10px] text-slate-400 font-mono mt-0.5">${ad.id}</div></td><td class="p-3"><input type="text" id="db_url_${ad.id}" value="${savedUrl}" placeholder="인스타/페북 링크 붙여넣기" class="w-full p-2 rounded-lg border border-slate-200 text-xs font-mono"></td></tr>`;
+            });
+            document.getElementById('dbModal').classList.remove('hidden'); setTimeout(() => { document.getElementById('dbModal').classList.remove('opacity-0'); document.getElementById('dbModal').querySelector('div').classList.remove('scale-95'); }, 10);
+        }
+        function closeDbModal() { document.getElementById('dbModal').classList.add('opacity-0'); document.getElementById('dbModal').querySelector('div').classList.add('scale-95'); setTimeout(() => document.getElementById('dbModal').classList.add('hidden'), 300); }
+        function saveAllUrls() {
+            state.ads.forEach(ad => { const inp = document.getElementById(`db_url_${ad.id}`); if(inp) { const val = inp.value.trim(); if(val) state.manualUrls[ad.id] = val; else delete state.manualUrls[ad.id]; } });
+            localStorage.setItem('yomimon_v27_urls', JSON.stringify(state.manualUrls)); showToast("URL DB가 로컬에 일괄 저장되었습니다.", "success"); closeDbModal();
+        }
+
+        function openAdPreview(adId) {
+            const savedUrl = state.manualUrls[adId];
+            if(savedUrl) { window.open(savedUrl, '_blank', 'width=420,height=850,top=50,left=100,scrollbars=yes,resizable=yes'); showToast("미리보기를 열었습니다.", "success"); } 
+            else { document.getElementById('targetAdIdForUrl').value = adId; document.getElementById('singleUrlInput').value = ''; document.getElementById('urlPromptModal').classList.remove('hidden'); setTimeout(() => { document.getElementById('urlPromptModal').classList.remove('opacity-0'); document.getElementById('urlPromptModal').querySelector('div').classList.remove('scale-95'); }, 10); }
+        }
+        function closeUrlPromptModal() { document.getElementById('urlPromptModal').classList.add('opacity-0'); document.getElementById('urlPromptModal').querySelector('div').classList.add('scale-95'); setTimeout(() => document.getElementById('urlPromptModal').classList.add('hidden'), 300); }
+        function submitSingleUrl() {
+            const adId = document.getElementById('targetAdIdForUrl').value, url = document.getElementById('singleUrlInput').value.trim();
+            if(!url) { showToast("URL을 입력해주세요.", "warning"); return; }
+            state.manualUrls[adId] = url; localStorage.setItem('yomimon_v27_urls', JSON.stringify(state.manualUrls)); closeUrlPromptModal();
+            window.open(url, '_blank', 'width=420,height=850,top=50,left=100,scrollbars=yes,resizable=yes');
+        }
+
+        function toggleTokenVisibility() { const i = document.getElementById('accessToken'), ic = document.getElementById('tokenEyeIcon'); i.type = i.type === 'password' ? 'text' : 'password'; ic.setAttribute('data-lucide', i.type === 'password' ? 'eye' : 'eye-off'); lucide.createIcons(); }
+        function saveCredentials(id, tok, pic, date, cloudUrl) { if(document.getElementById('saveCreds').checked) localStorage.setItem('yomimon_v27_cred', JSON.stringify({id, tok, pic, date, cloudUrl, rem:true})); else localStorage.removeItem('yomimon_v27_cred'); }
+        function loadCredentials() { try { const c = JSON.parse(localStorage.getItem('yomimon_v27_cred')); if(c && c.rem) { document.getElementById('accountId').value=c.id||''; document.getElementById('accessToken').value=c.tok||''; if(c.pic) document.getElementById('picName').value = c.pic; if(c.date) document.getElementById('datePreset').value = c.date; if(c.cloudUrl) document.getElementById('cloudUrl').value = c.cloudUrl; document.getElementById('saveCreds').checked=true; } }catch(e){} }
+
+        // ================= 자체 수학적 차액 계산 로컬 로직 =================
+        function processAuditLogLocal(items) {
+            const pic = document.getElementById('picName').value.trim() || '담당자 미상';
+            const now = new Date().toLocaleString('ko-KR', { month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+            let updated = false;
+
+            items.forEach(i => {
+                const curBud = i.daily_budget ? parseInt(i.daily_budget) : 0;
+                if(curBud === 0) return;
+                
+                if(state.baseline[i.id] === undefined) { 
+                    state.baseline[i.id] = curBud; 
+                    updated = true; 
+                } 
+                else {
+                    const baseBud = state.baseline[i.id];
+                    if(baseBud !== curBud) {
+                        if(!state.historyLog[i.id]) state.historyLog[i.id] = [];
+                        const logs = state.historyLog[i.id];
+                        
+                        if(logs.length === 0 || logs[0].budget !== curBud) {
+                            const diff = curBud - baseBud;
+                            logs.unshift({ budget: curBud, diff: diff, time: now, pic: pic + " (직접 변경)" });
+                            if(logs.length > 5) logs.pop(); 
+                            state.baseline[i.id] = curBud;
+                            updated = true;
+                        }
+                    }
+                }
+            });
+
+            if(updated) {
+                localStorage.setItem('yomimon_v27_baseline', JSON.stringify(state.baseline));
+                localStorage.setItem('yomimon_v27_history', JSON.stringify(state.historyLog));
+            }
+        }
+
+        function resetBaseline() {
+            showConfirm("모든 변경 이력을 초기화하고, 현재 예산을 새로운 기준으로 삼아 보고판을 정리할까요?", () => {
+                state.baseline = {}; state.historyLog = {};
+                processAuditLogLocal(state.campaigns); processAuditLogLocal(state.adsets);
+                renderTable(); showToast("이력 리셋 완료! (수동 백업을 누르면 클라우드도 덮어써집니다.)");
+            });
+        }
+
+        // ================= 분석(AI 리포트) 모달 & 총점 뱃지 로직 =================
+        function calculateEnergy(ins) {
+            if (!ins) return { score: 0, text: '데이터 부족', color: 'bg-slate-200', bar: 'bg-slate-400', emoji: '❔' };
+            const freq = parseFloat(ins.frequency) || 1.0, ctr = parseFloat(ins.ctr) || 1.0, cpm = parseFloat(ins.cpm) || 10000, spend = parseFloat(ins.spend) || 0;
+            if (spend < 5000) return { score: 100, text: '학습 중', color: 'bg-blue-100', bar: 'bg-blue-500', emoji: '🧐' };
+            let score = 100;
+            if (freq > 1.5) score -= (freq - 1.5) * 25;
+            if (ctr < 1.2) score -= (1.2 - ctr) * 40;
+            if (cpm > 15000) score -= (cpm - 15000) / 1000;
+            score = Math.max(0, Math.min(100, Math.round(score)));
+            if (score >= 70) return { score, text: '쌩쌩함', color: 'text-emerald-700 bg-emerald-50', bar: 'bg-emerald-500', emoji: '😆' };
+            else if (score >= 40) return { score, text: '피로도 누적', color: 'text-amber-700 bg-amber-50', bar: 'bg-amber-500', emoji: '😥' };
+            else return { score, text: '소재 교체 요망', color: 'text-rose-700 bg-rose-50', bar: 'bg-rose-500', emoji: '☠️' };
+        }
+
+        let detailChartInstance = null;
+        
+        function generateAIComment(ins, type) {
+            if(!ins || !ins.spend || parseInt(ins.spend) < 5000) {
+                return "📉 <strong>데이터가 아직 충분하지 않습니다.</strong><br>메타 머신러닝이 최적화 경로를 탐색 중이니 예산을 더 소진한 뒤 분석을 요청해 주세요.";
+            }
+
+            const spend = parseInt(ins.spend);
+            let rev = 0;
+            if(ins.action_values) {
+                const pur = ins.action_values.find(v => v.action_type === 'omni_purchase' || v.action_type === 'purchase');
+                if(pur) rev = parseInt(pur.value);
+            }
+            const roas = spend > 0 ? (rev/spend)*100 : 0;
+            const cpm = parseFloat(ins.cpm) || 0;
+            const ctr = parseFloat(ins.ctr) || 0;
+            const freq = parseFloat(ins.frequency) || 1.0;
+
+            let comments = [];
+
+            if(roas >= 150) comments.push("🔥 <strong>수익성 극대화 구간입니다! (ROAS 우수)</strong><br>타겟팅과 소재의 핏이 완벽하게 맞았습니다. 이 캠페인(세트)의 예산을 점진적으로 증액하여 스케일업(Scale-up)을 시도해 볼 타이밍입니다.");
+            else if(roas >= 100) comments.push("⚖️ <strong>손익분기점(BEP) 방어 구간입니다.</strong><br>현재 효율이 유지되고 있으나 단가가 조금만 튀어도 적자로 전환될 수 있습니다. 후킹 포인트를 강화한 B안 소재를 준비해두는 것이 좋습니다.");
+            else comments.push("⚠️ <strong>수익성 경고 (적자 구간)</strong><br>광고비 대비 매출 전환이 약합니다. 이탈률이 높은지 상세페이지 퍼널을 점검하시거나, 타겟을 재정비해야 합니다.");
+
+            if(freq >= 2.5) comments.push("☠️ <strong>피로도 한계 도달:</strong> 동일 유저에게 너무 자주 노출(빈도 높음)되고 있습니다. 신규 영상으로 교체하거나, 논타겟(Broad)으로 모수를 확장하세요.");
+            else if(ctr < 1.0) comments.push("👀 <strong>소재 매력도 저하:</strong> 클릭률(CTR)이 1.0% 미만입니다. 유저의 스크롤을 멈추게 하는 첫 3초의 시각적 훅(Hook)이나 텍스트를 수정하세요.");
+            else if(cpm > 15000) comments.push("💸 <strong>입찰 단가(CPM) 부담:</strong> 타겟팅이 너무 좁거나 겹쳐서 비싸게 광고를 사오고 있습니다. 연령대나 관심사 타겟을 약간 헐겁게 풀어주세요.");
+            else if(comments.length === 1 && roas > 0) comments.push("✅ 전반적인 트래픽 지표는 무난한 흐름을 보이고 있습니다. 지속적인 모니터링을 권장합니다.");
+
+            let timingSuggestion = "";
+            if (roas >= 150) {
+                timingSuggestion = "💡 <strong>증액 시점 제안:</strong> 유저 트래픽이 몰리는 오후/저녁 시간대 진입 전(낮 12시~2시)이나, 자정(00시) 직후에 기존 예산의 15~20% 이내로 증액하시는 것을 권장합니다.";
+            } else if (roas > 0 && roas < 100) {
+                timingSuggestion = "💡 <strong>감액/OFF 시점 제안:</strong> 즉각적인 감액보다는 트래픽이 몰리는 주말/저녁까지 지켜본 후, 자정 직전에 최종 판단하여 OFF 또는 예산을 최소한으로 줄이는 것이 안전합니다.";
+            } else {
+                timingSuggestion = "💡 <strong>예산 유지 제안:</strong> 현재는 예산을 변경하기보다 메타 머신러닝이 최적화될 수 있도록 2~3일간 현재 예산을 유지하며 지켜보시는 것이 좋습니다.";
+            }
+            comments.push(timingSuggestion);
+
+            return comments.join("<br><br>");
+        }
+
+        function openDetailModal(type, id) {
+            let dataObj = type === 'camp' ? state.campaigns.find(c=>c.id===id) : type === 'adset' ? state.adsets.find(a=>a.id===id) : state.ads.find(a=>a.id===id);
+            if(!dataObj) return;
+            
+            let typeStr = type === 'camp' ? '캠페인' : (type === 'adset' ? '광고 세트' : '광고 소재(Ad)');
+            document.getElementById('detailTitle').innerHTML = `<i data-lucide="bar-chart-2" class="w-6 h-6 text-blue-600"></i> ${dataObj.name}`;
+            document.getElementById('detailSubtitle').innerText = `[${typeStr}] 세부 지표 시각화 및 AI 진단`;
+            
+            const ins = dataObj.insights?.data?.[0];
+            let spend = 0, rev = 0, roas = 0, cpm = 0, ctr = 0, freq = 0, purchases = 0;
+            if(ins) {
+                spend = parseInt(ins.spend || 0);
+                if(ins.action_values) { const pur = ins.action_values.find(v => v.action_type === 'omni_purchase' || v.action_type === 'purchase'); if(pur) rev = parseInt(pur.value); }
+                if(ins.actions) { const purAction = ins.actions.find(a => a.action_type === 'omni_purchase' || a.action_type === 'purchase'); if(purAction) purchases = parseInt(purAction.value); }
+                roas = spend > 0 ? ((rev/spend)*100).toFixed(0) : 0; cpm = parseFloat(ins.cpm || 0); ctr = parseFloat(ins.ctr || 0); freq = parseFloat(ins.frequency || 0);
+            }
+            
+            document.getElementById('detailSpend').innerText = spend.toLocaleString() + '원'; 
+            document.getElementById('detailRev').innerHTML = `${rev.toLocaleString()}원 <span class="text-sm font-medium text-slate-500">(${purchases}건)</span>`;
+            document.getElementById('detailRoas').innerText = roas + '%';
+
+            const evalWrap = document.getElementById('detailEvalWrap');
+            const evalText = document.getElementById('detailEvalText');
+            const evalIcon = document.getElementById('detailEvalIcon');
+            const roasBox = document.getElementById('detailRoasBox');
+            const roasLabel = document.getElementById('detailRoasLabel');
+            const roasValue = document.getElementById('detailRoas');
+            
+            evalWrap.className = "p-4 rounded-2xl border flex items-center justify-between shadow-sm transition-colors duration-300 ";
+            roasBox.className = "flex-1 p-4 rounded-2xl border transition-colors duration-300 ";
+
+            if (spend < 5000) {
+                evalWrap.classList.add("bg-slate-50", "border-slate-200");
+                evalText.innerText = "TEST"; evalText.className = "text-2xl font-black tracking-tight text-slate-600"; evalIcon.innerText = "🧐";
+                roasBox.classList.add("bg-slate-50", "border-slate-200"); roasLabel.className = "text-[11px] font-bold uppercase mb-1 text-slate-500"; roasValue.className = "text-lg font-black text-slate-700";
+            } else if (roas >= 150) {
+                evalWrap.classList.add("bg-emerald-50", "border-emerald-200");
+                evalText.innerText = "GOOD"; evalText.className = "text-2xl font-black tracking-tight text-emerald-600"; evalIcon.innerText = "😎";
+                roasBox.classList.add("bg-emerald-50", "border-emerald-200"); roasLabel.className = "text-[11px] font-bold uppercase mb-1 text-emerald-600"; roasValue.className = "text-lg font-black text-emerald-700";
+            } else if (roas >= 100) {
+                evalWrap.classList.add("bg-amber-50", "border-amber-200");
+                evalText.innerText = "SOSO"; evalText.className = "text-2xl font-black tracking-tight text-amber-600"; evalIcon.innerText = "😐";
+                roasBox.classList.add("bg-amber-50", "border-amber-200"); roasLabel.className = "text-[11px] font-bold uppercase mb-1 text-amber-600"; roasValue.className = "text-lg font-black text-emerald-700";
+            } else {
+                evalWrap.classList.add("bg-rose-50", "border-rose-200");
+                evalText.innerText = "BAD"; evalText.className = "text-2xl font-black tracking-tight text-rose-600"; evalIcon.innerText = "🚨";
+                roasBox.classList.add("bg-rose-50", "border-rose-200"); roasLabel.className = "text-[11px] font-bold uppercase mb-1 text-rose-600"; roasValue.className = "text-lg font-black text-rose-700";
+            }
+
+            document.getElementById('aiCommentBox').innerHTML = generateAIComment(ins, type);
+
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            if(detailChartInstance) detailChartInstance.destroy();
+            const normRoas = Math.min((roas / 300) * 100, 100) || 10; const normCtr = Math.min((ctr / 3.0) * 100, 100) || 10;
+            const normFreq = freq > 0 ? Math.max(100 - ((freq - 1) * 30), 10) : 100; const normCpm = cpm > 0 ? Math.max(100 - (cpm / 200), 10) : 100;
+            detailChartInstance = new Chart(ctx, { type: 'radar', data: { labels: ['수익성(ROAS)', '클릭매력(CTR)', '전환효율(낮은 CPP)', '단가효율(낮은 CPM)'], datasets: [{ label: '건강도 밸런스', data: [normRoas, normCtr, normFreq, normCpm], backgroundColor: 'rgba(37, 99, 235, 0.2)', borderColor: 'rgba(37, 99, 235, 1)', pointBackgroundColor: 'rgba(37, 99, 235, 1)', borderWidth: 2 }] }, options: { responsive: true, scales: { r: { angleLines: { color: 'rgba(0,0,0,0.05)' }, grid: { color: 'rgba(0,0,0,0.05)' }, pointLabels: { font: { size: 10, family: 'Pretendard' }, color: '#64748b' }, ticks: { display: false, min: 0, max: 100 } } }, plugins: { legend: { display: false }, tooltip: { enabled: false } } } });
+            lucide.createIcons(); document.getElementById('detailModal').classList.remove('hidden'); setTimeout(() => { document.getElementById('detailModal').classList.remove('opacity-0'); document.getElementById('detailModal').querySelector('div').classList.remove('scale-95'); }, 10);
+        }
+        function closeDetailModal() { document.getElementById('detailModal').classList.add('opacity-0'); document.getElementById('detailModal').querySelector('div').classList.add('scale-95'); setTimeout(() => document.getElementById('detailModal').classList.add('hidden'), 300); }
+
+        function getPerformanceHTML(ins) {
+            if(!ins || !ins.spend) return `<span class="text-[11px] text-slate-400">데이터 부족</span>`;
+            const spend = parseInt(ins.spend); let rev = 0;
+            if(ins.action_values) { const pur = ins.action_values.find(v => v.action_type === 'omni_purchase' || v.action_type === 'purchase'); if(pur) rev = parseInt(pur.value); }
+            const roas = spend > 0 ? ((rev/spend)*100).toFixed(0) : 0;
+            return `<div class="flex flex-col gap-1"><div class="flex justify-between items-center text-[10px]"><span class="text-slate-500">지출:</span><span class="font-mono font-medium text-slate-700">${spend.toLocaleString()}원</span></div><div class="flex justify-between items-center text-[10px]"><span class="text-slate-500">매출:</span><span class="font-mono font-bold text-blue-600">${rev.toLocaleString()}원</span></div><div class="pt-0.5 mt-0.5 border-t border-slate-200/60 flex justify-between items-center"><span class="text-[10px] font-bold text-slate-500">ROAS</span><span class="text-[11px] font-extrabold ${roas >= 200 ? 'text-emerald-600' : roas >= 100 ? 'text-amber-600' : 'text-rose-600'}">${roas}%</span></div></div>`;
+        }
+        
+        // 구매건수와 단가(CPP)를 한 줄에 컴팩트하게 결합
+        function getMetricsHTML(ins) {
+            if(!ins || !ins.cpm) return `<span class="text-xs text-slate-400">-</span>`;
+            const cpm = parseFloat(ins.cpm).toLocaleString(undefined, {maximumFractionDigits:0}), ctr = parseFloat(ins.ctr).toFixed(2);
+            let purchases = 0;
+            if(ins.actions) { const purAction = ins.actions.find(a => a.action_type === 'omni_purchase' || a.action_type === 'purchase'); if(purAction) purchases = parseInt(purAction.value); }
+            const spend = parseInt(ins.spend || 0);
+            let cppText = '-';
+            if (purchases > 0) { const cpp = Math.round(spend / purchases); cppText = cpp.toLocaleString() + '원'; } 
+            else if (spend > 0) { cppText = '단가 없음'; }
+            
+            return `
+            <div class="flex flex-col gap-1 text-[10px] font-mono">
+                <div class="flex justify-between"><span class="text-slate-400 font-sans">CPM</span><span class="text-slate-700">${cpm}원</span></div>
+                <div class="flex justify-between"><span class="text-slate-400 font-sans">CTR</span><span class="${ctr < 1.0 ? 'text-rose-500 font-bold' : 'text-slate-700'}">${ctr}%</span></div>
+                <div class="flex justify-between items-center mt-0.5 pt-0.5 border-t border-slate-200/50">
+                    <span class="text-[9px] font-bold text-slate-500 font-sans">구매(단가)</span>
+                    <span class="${purchases === 0 ? 'text-slate-400' : 'text-emerald-600 font-bold'}">${purchases}건 <span class="text-[9px] font-normal opacity-70">(${cppText})</span></span>
+                </div>
+            </div>`;
+        }
+        
+        function getEnergyBarHTML(ins) {
+            if(!ins || !ins.spend) return `<span class="text-xs text-slate-300">평가 불가</span>`;
+            const nrg = calculateEnergy(ins);
+            return `<div class="flex flex-col items-center w-full px-1"><div class="flex items-center gap-1 mb-1"><span class="text-base">${nrg.emoji}</span><span class="text-[9px] font-bold px-1 py-0.5 rounded ${nrg.color} whitespace-nowrap">${nrg.text}</span></div><div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden"><div class="energy-fill ${nrg.bar} h-1.5 rounded-full" style="width: ${nrg.score}%"></div></div></div>`;
+        }
+
+        // 글자 깨짐 방지 완벽 코팅 렌더링
+        function renderLogItem(log, index) {
+            const isUp = log.diff > 0;
+            const diffClass = isUp ? 'text-rose-600 bg-rose-50 border-rose-200' : 'text-blue-600 bg-blue-50 border-blue-200';
+            const diffAmount = Math.abs(log.diff).toLocaleString();
+            const diffFinalText = isUp ? `▲ +${diffAmount}원` : `▼ -${diffAmount}원`;
+            const totalText = (typeof log.budget === 'number' && log.budget > 0) ? `[총 ${log.budget.toLocaleString()}원]` : '';
+
+            return `
+                <div class="flex flex-col items-start bg-white p-1.5 rounded-md border border-slate-100 shadow-sm w-full text-left ${index > 0 ? 'opacity-70' : ''}">
+                    <div class="flex justify-between w-full items-center mb-1 gap-1">
+                        <div class="flex items-center gap-1 flex-wrap">
+                            <span class="text-[12px] font-extrabold px-2 py-0.5 rounded border whitespace-nowrap ${diffClass}">${diffFinalText} ${totalText}</span>
+                        </div>
+                        <span class="text-[10px] text-slate-400 font-mono whitespace-nowrap">${log.time}</span>
+                    </div>
+                    <div class="flex items-center gap-1 text-[11px] text-slate-500 w-full">
+                        <i data-lucide="user-check" class="w-2.5 h-2.5 text-emerald-600"></i> <strong class="whitespace-nowrap">${log.pic}</strong>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getHistoryHTML(id) {
+            const logs = state.historyLog[id];
+            if(!logs || logs.length === 0) return `<span class="text-[10px] text-slate-300">- 변동 없음 -</span>`;
+            
+            let html = '<div class="flex flex-col gap-1 w-full">';
+            html += renderLogItem(logs[0], 0);
+            
+            if (logs.length > 1) {
+                html += `<button onclick="toggleHistory('${id}')" class="text-[9px] text-slate-400 hover:text-slate-600 flex items-center justify-center gap-0.5 mt-0.5 w-full bg-slate-50 hover:bg-slate-100 py-1.5 rounded border border-slate-200 transition-colors"><i id="hist-icon-${id}" data-lucide="chevron-down" class="w-2.5 h-2.5"></i><span id="hist-text-${id}">과거 이력 ${logs.length - 1}건 더보기</span></button>`;
+                html += `<div id="hist-fold-${id}" class="hidden flex-col gap-1 mt-1 pt-1 border-t border-slate-100">`;
+                for(let i=1; i<logs.length; i++) { html += renderLogItem(logs[i], i); }
+                html += `</div>`;
+            }
+            html += '</div>';
+            return html;
+        }
+
+        // ================= 렌더링 =================
+        function renderTable() {
+            const tbody = document.getElementById('dataTableBody'); tbody.innerHTML = '';
+            if(state.campaigns.length === 0) { tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-12 text-center text-slate-400">데이터가 없습니다.</td></tr>`; return; }
+
+            state.campaigns.forEach(camp => {
+                const isCBO = !!camp.daily_budget, cBud = isCBO ? parseInt(camp.daily_budget) : 0, ins = camp.insights?.data?.[0], relAdsets = state.adsets.filter(a => a.campaign_id === camp.id);
+                tbody.innerHTML += `<tr class="bg-slate-100/80 border-l-4 ${isCBO?'border-l-blue-500':'border-l-purple-500'} border-y border-slate-200"><td class="px-3 py-3 text-center"><span class="text-[10px] px-1.5 py-0.5 rounded font-extrabold ${isCBO?'bg-blue-100 text-blue-700':'bg-purple-100 text-purple-700'}">${isCBO?'CBO':'ABO'}</span></td><td class="px-3 py-3"><div class="flex items-center gap-2 mb-1"><span class="font-black text-slate-800 text-[12px] truncate max-w-[200px]">${camp.name}</span><button onclick="openDetailModal('camp', '${camp.id}')" class="shrink-0 flex items-center gap-1 px-1.5 py-0.5 bg-blue-600 hover:bg-blue-700 text-white rounded text-[9px] font-bold shadow-sm"><i data-lucide="pie-chart" class="w-3 h-3"></i>분석</button></div><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full ${camp.status==='ACTIVE'?'bg-emerald-500':'bg-slate-300'}"></span><span class="text-[9px] text-slate-400 font-mono">${camp.id}</span></div></td><td class="px-3 py-3 border-x border-slate-200/50">${getPerformanceHTML(ins)}</td><td class="px-3 py-3">${getMetricsHTML(ins)}</td><td class="px-3 py-3 border-x border-slate-200/50">${getEnergyBarHTML(ins)}</td><td class="px-3 py-3 text-center"><span class="font-bold text-[11px] text-slate-700">${isCBO ? cBud.toLocaleString()+'원' : '-'}</span></td><td class="px-3 py-2 bg-slate-50 border-l border-slate-200/50 text-center flex items-center justify-center min-h-[70px] align-top w-64">${isCBO ? getHistoryHTML(camp.id) : `<div class="flex h-full items-center"><span class="text-[9px] text-slate-400">하위 세트 참조</span></div>`}</td></tr>`;
+
+                if(relAdsets.length > 0) {
+                    relAdsets.forEach(adset => {
+                        const aBud = adset.daily_budget ? parseInt(adset.daily_budget) : 0, aIns = adset.insights?.data?.[0], relAds = state.ads.filter(ad => ad.adset_id === adset.id);
+                        tbody.innerHTML += `<tr class="bg-white hover:bg-slate-50 border-b border-slate-100"><td class="px-3 py-2.5 text-center"><i data-lucide="corner-down-right" class="w-4 h-4 mx-auto text-slate-300"></i></td><td class="px-3 py-2.5 pl-6"><div class="flex items-center gap-2 mb-1"><span class="font-bold text-slate-600 text-[11px] truncate max-w-[180px]">${adset.name}</span><button onclick="openDetailModal('adset', '${adset.id}')" class="shrink-0 flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 rounded text-[9px] font-bold"><i data-lucide="pie-chart" class="w-3 h-3"></i>분석</button></div><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full ${adset.status==='ACTIVE'?'bg-emerald-500':'bg-slate-300'}"></span><span class="text-[9px] text-slate-400 font-mono">${adset.id}</span>${relAds.length > 0 ? `<button onclick="toggleAds('${adset.id}')" class="ml-2 flex items-center gap-0.5 px-1 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-[9px] font-bold transition-colors border border-slate-200"><i id="icon-ad-${adset.id}" data-lucide="chevron-down" class="w-2.5 h-2.5"></i>소재 펼치기 (${relAds.length}개)</button>` : ''}</div></td><td class="px-3 py-2.5 border-x border-slate-100">${getPerformanceHTML(aIns)}</td><td class="px-3 py-2.5">${getMetricsHTML(aIns)}</td><td class="px-3 py-2.5 border-x border-slate-100">${getEnergyBarHTML(aIns)}</td><td class="px-3 py-2.5 text-center"><span class="font-medium text-slate-600 text-[11px]">${aBud > 0 ? aBud.toLocaleString()+'원' : '<span class="text-slate-400">공유됨</span>'}</span></td><td class="px-3 py-2 bg-slate-50/50 border-l border-slate-100 text-center flex items-center justify-center min-h-[70px] align-top w-64">${aBud > 0 ? getHistoryHTML(adset.id) : `<div class="flex h-full items-center"><span class="text-[9px] text-slate-300">-</span></div>`}</td></tr>`;
+
+                        if(relAds.length > 0) {
+                            relAds.forEach(ad => {
+                                const adIns = ad.insights?.data?.[0];
+                                tbody.innerHTML += `<tr class="ad-row-${adset.id} hidden bg-slate-50/30 hover:bg-slate-100/50 border-b border-dashed border-slate-100 ad-row-anim"><td class="px-3 py-2 text-center"></td><td class="px-3 py-2 pl-12 flex items-center gap-2"><i data-lucide="image" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i><div><div class="flex items-center gap-1.5 mb-0.5"><span class="font-medium text-slate-500 text-[11px] truncate max-w-[150px]">${ad.name}</span><div class="flex shrink-0 gap-1"><button onclick="openAdPreview('${ad.id}')" class="flex items-center gap-0.5 px-1.5 py-0.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded text-[9px] font-bold shadow-sm"><i data-lucide="smartphone" class="w-2.5 h-2.5"></i>미리보기</button><button onclick="openRealAdsManager('${ad.id}', 'ad')" class="flex items-center gap-0.5 px-1 py-0.5 bg-white hover:bg-slate-200 text-slate-700 border border-slate-300 rounded text-[9px] font-bold shadow-sm"><i data-lucide="external-link" class="w-2.5 h-2.5"></i>관리자</button><button onclick="openDetailModal('ad', '${ad.id}')" class="flex items-center gap-0.5 px-1 py-0.5 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 rounded text-[9px] font-bold"><i data-lucide="pie-chart" class="w-2.5 h-2.5"></i></button></div></div><div class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full ${ad.status==='ACTIVE'?'bg-emerald-500':'bg-slate-300'}"></span><span class="text-[9px] text-slate-400 font-mono">${ad.id}</span></div></div></td><td class="px-3 py-2 border-x border-slate-100 opacity-90">${getPerformanceHTML(adIns)}</td><td class="px-3 py-2 opacity-90">${getMetricsHTML(adIns)}</td><td class="px-3 py-2 border-x border-slate-100 opacity-90">${getEnergyBarHTML(adIns)}</td><td class="px-3 py-2 text-center text-slate-300 text-[9px]">-</td><td class="px-3 py-2 bg-slate-50/30 border-l border-slate-100 text-center text-slate-300 text-[9px]">-</td></tr>`;
+                            });
+                        }
+                    });
+                }
+            });
+            lucide.createIcons();
+            setTimeout(() => { document.querySelectorAll('.energy-fill').forEach(el => { const w = el.style.width; el.style.width = '0%'; setTimeout(() => el.style.width = w, 50); }); }, 100);
+        }
+
+        // 1주일 API + 수학적 하이브리드 엔진 100% 복구 완료
+        async function fetchData() {
+            if (state.isDemo) { showToast("시연 모드를 끄고 진행해주세요.", "warning"); return; }
+            const acc = document.getElementById('accountId').value.trim(); const tok = document.getElementById('accessToken').value.trim();
+            const pic = document.getElementById('picName').value.trim(); const datePreset = document.getElementById('datePreset').value;
+            const cloudUrl = document.getElementById('cloudUrl').value.trim();
+
+            if (!acc || !tok) { showToast("ID와 토큰을 입력하세요.", "error"); return; }
+            if (!pic) { showToast("보고 담당자 이름을 입력해야 이력이 기록됩니다.", "warning"); document.getElementById('picName').focus(); return; }
+            
+            saveCredentials(acc, tok, pic, datePreset, cloudUrl); checkCloudStatus();
+            document.getElementById('loadingStatus').classList.remove('hidden'); document.getElementById('loadingStatus').classList.add('flex');
+            
+            try {
+                // 1. 현재 메타 예산 로드
+                const insParams = `insights.date_preset(${datePreset}){spend,action_values,actions,cpm,ctr,frequency}`;
+                const cRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/campaigns?fields=name,status,daily_budget,${insParams}&access_token=${tok}&limit=100`);
+                const cData = await cRes.json(); if(cData.error) throw new Error(cData.error.message);
+                state.campaigns = (cData.data || []).filter(c => c.status === 'ACTIVE');
+
+                const aRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/adsets?fields=name,status,daily_budget,campaign_id,${insParams}&access_token=${tok}&limit=200`);
+                const aData = await aRes.json(); state.adsets = (aData.data || []).filter(a => a.status === 'ACTIVE');
+
+                const adRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/ads?fields=name,status,adset_id,campaign_id,${insParams}&access_token=${tok}&limit=300`);
+                const adData = await adRes.json(); state.ads = (adData.data || []).filter(a => a.status === 'ACTIVE');
+
+                // 2. 과거 1주일 Meta API 활동내역 복구 (하이브리드 엔진)
+                const curBudMap = {};
+                state.campaigns.forEach(c => curBudMap[c.id] = c.daily_budget ? parseInt(c.daily_budget) : 0);
+                state.adsets.forEach(a => curBudMap[a.id] = a.daily_budget ? parseInt(a.daily_budget) : 0);
+
+                try {
+                    const since = Math.floor((Date.now() - 7 * 24 * 60 * 60 * 1000) / 1000);
+                    const actRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/activities?fields=actor_name,event_time,extra_data,object_id,translated_event_type&since=${since}&limit=100&access_token=${tok}`);
+                    const actData = await actRes.json();
+
+                    if(actData.data) {
+                        actData.data.forEach(act => {
+                            const evType = act.translated_event_type || "";
+                            const exDataStr = act.extra_data ? (typeof act.extra_data === 'string' ? act.extra_data : JSON.stringify(act.extra_data)) : "";
+                            
+                            // 예산 변경 활동 필터링
+                            if (evType.includes('예산') || evType.includes('지출') || exDataStr.includes('budget') || exDataStr.includes('spend')) {
+                                let oldV = null, newV = null, diff = 0, newBudget = 0, isParsed = false;
+                                const tId = act.object_id;
+                                const curBud = curBudMap[tId] || 0;
+
+                                // 2-1. 메타 데이터 안에 옛날 예산, 새 예산 숫자가 있으면 파싱
+                                const matchOld = exDataStr.match(/"old(?:_value)?"\s*:\s*"?(\d+)"?/i);
+                                const matchNew = exDataStr.match(/"new(?:_value)?"\s*:\s*"?(\d+)"?/i);
+                                if (matchOld && matchNew) {
+                                    oldV = parseInt(matchOld[1]); newV = parseInt(matchNew[1]);
+                                } else {
+                                    const wonMatch = (evType + " " + exDataStr).match(/₩\s*([\d,]+)/g);
+                                    if (wonMatch && wonMatch.length >= 2) {
+                                        oldV = parseInt(wonMatch[wonMatch.length - 2].replace(/[^\d]/g, ''));
+                                        newV = parseInt(wonMatch[wonMatch.length - 1].replace(/[^\d]/g, ''));
+                                    }
+                                }
+
+                                if (oldV !== null && newV !== null) {
+                                    let scale = 1;
+                                    // 센트단위(00 두개 증발) 방어 코드 
+                                    if (!exDataStr.includes('₩')) {
+                                        if (curBud > 0 && newV === curBud * 100) scale = 100;
+                                        else if (curBud > 0 && oldV === curBud * 100) scale = 100;
+                                        else if (newV >= 10000000 && newV % 100 === 0 && oldV % 100 === 0) scale = 100;
+                                    }
+
+                                    oldV = oldV / scale; newV = newV / scale;
+                                    diff = newV - oldV; newBudget = newV;
+                                    if (diff !== 0) isParsed = true;
+                                }
+
+                                // 2-2. 수학적 덮어쓰기 (메타가 숫자를 안 주면 -> 현재 예산과 기존 기준점을 빼버리는 '수학적 계산')
+                                if (!isParsed && curBud > 0) {
+                                    const baseBud = state.baseline[tId];
+                                    if (baseBud !== undefined && baseBud !== curBud) {
+                                        diff = curBud - baseBud;
+                                        newBudget = curBud;
+                                        isParsed = true;
+                                    }
+                                }
+
+                                if (!state.historyLog[tId]) state.historyLog[tId] = [];
+                                const timeStr = new Date(act.event_time).toLocaleString('ko-KR', { month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+                                const exists = state.historyLog[tId].some(l => l.time === timeStr);
+
+                                if (!exists && isParsed && diff !== 0) {
+                                    state.historyLog[tId].push({ budget: newBudget, diff: diff, time: timeStr, pic: act.actor_name || "메타 시스템" });
+                                }
+                            }
+                        });
+                        Object.keys(state.historyLog).forEach(k => { state.historyLog[k].sort((a,b) => new Date(b.time) - new Date(a.time)); });
+                    }
+                } catch(e) { console.warn("API Activity 로드 에러 (무시하고 로컬 진행)", e); }
+
+                // 3. 로컬 갭(Gap) 체크 (API가 아직 감지 못한 방금 수정한 내역 잡기)
+                processAuditLogLocal(state.campaigns); 
+                processAuditLogLocal(state.adsets);
+                
+                renderTable(); showToast("1주일 API & 하이브리드 엔진 계산 완료!", "success");
+
+                // ★ 자동 클라우드 저장 (fetchData 외부 try와 별개로 분리)
+                setTimeout(async () => {
+                    try {
+                        const autoPayload = { baseline: state.baseline, historyLog: state.historyLog, manualUrls: state.manualUrls };
+                        const dbRows = [];
+                        const now = new Date().toLocaleString('ko-KR');
+                        const picName = document.getElementById('picName').value.trim();
+                        [...state.campaigns, ...state.adsets, ...state.ads].forEach(item => {
+                            const ins = item.insights?.data?.[0] || {};
+                            const spend = parseFloat(ins.spend || 0);
+                            const rev = parseFloat((ins.action_values || []).find(a => a.action_type === 'purchase')?.value || 0);
+                            const purchases = parseInt((ins.actions || []).find(a => a.action_type === 'purchase')?.value || 0);
+                            const roas = spend > 0 ? (rev / spend * 100).toFixed(0) + '%' : '-';
+                            const cpm = Math.round(parseFloat(ins.cpm || 0));
+                            const ctr = parseFloat(ins.ctr || 0).toFixed(2) + '%';
+                            const cpp = purchases > 0 ? Math.round(spend / purchases) : '-';
+                            const hist = (state.historyLog[item.id] || []).map(h => `${h.time} ${h.diff > 0 ? '+' : ''}${h.diff?.toLocaleString()}원`).join(' | ');
+                            const budget = item.daily_budget ? parseInt(item.daily_budget).toLocaleString() + '원' : '-';
+                            const type = state.campaigns.find(c => c.id === item.id) ? '캠페인' : state.adsets.find(a => a.id === item.id) ? '세트' : '소재';
+                            dbRows.push([now, type, item.name, budget, hist, Math.round(spend), Math.round(rev), roas, cpm, ctr, purchases, cpp, picName]);
+                        });
+                        await fetch(TEAM_CLOUD_URL, {
+                            method: 'POST',
+                            body: JSON.stringify({ payload: autoPayload, dbRows }),
+                            headers: { "Content-Type": "text/plain;charset=utf-8" }
+                        });
+                        showToast("☁️ 클라우드 자동 저장 완료!", "success");
+                    } catch(e) {
+                        console.warn("클라우드 자동 저장 실패", e);
+                    }
+                }, 100);
+
+            } catch (err) { showToast("API 연동 에러", "error");
+            } finally { document.getElementById('loadingStatus').classList.add('hidden'); document.getElementById('loadingStatus').classList.remove('flex'); }
+        }
+
+        function toggleDemoMode() {
+            state.isDemo = !state.isDemo;
+            if (state.isDemo) {
+                state.campaigns = [ { id: "c1", name: "[CBO] 마이크 체험단 영상 캠페인", status: "ACTIVE", daily_budget: "200000", insights: {data:[{spend: 85000, action_values: [{action_type:'purchase', value:'250000'}], actions: [{action_type:'purchase', value:'10'}], cpm: 8500, ctr: 1.8, frequency: 1.2}]} }, { id: "c2", name: "[ABO] 클레이 2차 각인 펀넬", status: "ACTIVE", insights: {data:[{spend: 150000, action_values: [{action_type:'purchase', value:'200000'}], actions: [{action_type:'purchase', value:'5'}], cpm: 12000, ctr: 0.8, frequency: 2.8}]} } ];
+                state.adsets = [ { id: "a1", campaign_id: "c2", name: "A세트_신규 유입 (클레이 훅)", status: "ACTIVE", daily_budget: "35000", insights: {data:[{spend: 120000, action_values: [{action_type:'purchase', value:'150000'}], actions: [{action_type:'purchase', value:'4'}], cpm: 18000, ctr: 0.6, frequency: 3.5}]} }, { id: "a2", campaign_id: "c2", name: "B세트_리타겟 (국내산)", status: "ACTIVE", daily_budget: "10000", insights: {data:[{spend: 30000, action_values: [{action_type:'purchase', value:'50000'}], actions: [{action_type:'purchase', value:'0'}], cpm: 9000, ctr: 2.5, frequency: 1.1}]} } ];
+                state.ads = [ { id: "ad1", adset_id: "a1", campaign_id: "c2", name: "소재_클레이 3초 훅(영상)", status: "ACTIVE", insights: {data:[{spend: 80000, action_values: [{action_type:'purchase', value:'100000'}], actions: [{action_type:'purchase', value:'3'}], cpm: 19000, ctr: 0.5, frequency: 3.8}]} }, { id: "ad2", adset_id: "a1", campaign_id: "c2", name: "소재_클레이 정면샷(이미지)", status: "ACTIVE", insights: {data:[{spend: 40000, action_values: [{action_type:'purchase', value:'50000'}], actions: [{action_type:'purchase', value:'1'}], cpm: 16000, ctr: 0.8, frequency: 2.9}]} }, { id: "ad3", adset_id: "a2", campaign_id: "c2", name: "소재_국내산 인증 마크(이미지)", status: "ACTIVE", insights: {data:[{spend: 30000, action_values: [{action_type:'purchase', value:'50000'}], actions: [{action_type:'purchase', value:'0'}], cpm: 9000, ctr: 2.5, frequency: 1.1}]} } ];
+                
+                state.baseline = {"c1": "50000", "a1": "30000", "a2": "20000"};
+                state.historyLog = { 
+                    "c1": [ { budget: 200000, diff: 150000, time: "05.28 오전 11:48", pic: "박 주임 (수학적 덮어쓰기)" } ],
+                    "a1": [ { budget: 35000, diff: 5000, time: "05.28 09:15", pic: "김 팀장" }, { budget: 30000, diff: 10000, time: "05.27 18:00", pic: "박 주임" } ]
+                };
+                renderTable(); showToast("구매건수 표기 추가! 데모 모드 활성화!");
+            } else { state.campaigns = []; state.adsets = []; state.ads = []; document.getElementById('dataTableBody').innerHTML = `<tr><td colspan="7" class="py-16 text-center text-slate-400">오프라인 상태입니다.</td></tr>`; }
+        }
+    </script>
+</body>
+</html>
