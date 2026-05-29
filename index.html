@@ -508,6 +508,7 @@
             const savedUrl = state.manualUrls[adId];
             if(savedUrl) { window.open(savedUrl, '_blank', 'width=420,height=850,top=50,left=100,scrollbars=yes,resizable=yes'); showToast("미리보기를 열었습니다.", "success"); }
             else { openUrlModal(adId, false); }
+        }
 
         function openUrlModal(adId, isEdit) {
             document.getElementById('targetAdIdForUrl').value = adId;
