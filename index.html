@@ -836,18 +836,23 @@ function getEnergyBarHTML(ins) {
             document.getElementById('loadingStatus').classList.remove('hidden'); document.getElementById('loadingStatus').classList.add('flex');
             
             try {
-                // 1. 현재 메타 예산 로드 (생성일자 추가)
+// 1. 현재 메타 예산 로드 (과부하 방지를 위한 리밋 조정 및 에러 추적 강화)
                 const insParams = `insights.date_preset(${datePreset}){spend,action_values,actions,cpm,ctr,frequency,impressions,clicks}`;
-                const cRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/campaigns?fields=name,status,daily_budget,created_time,${insParams}&access_token=${tok}&limit=100`);
-                const cData = await cRes.json(); if(cData.error) throw new Error(cData.error.message);
+                
+                const cRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/campaigns?fields=name,status,daily_budget,created_time,${insParams}&access_token=${tok}&limit=50`);
+                const cData = await cRes.json(); 
+                if(cData.error) throw new Error("[캠페인] " + cData.error.message);
                 state.campaigns = (cData.data || []).filter(c => c.status === 'ACTIVE');
 
-                const aRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/adsets?fields=name,status,daily_budget,campaign_id,created_time,${insParams}&access_token=${tok}&limit=200`);
-                const aData = await aRes.json(); state.adsets = (aData.data || []).filter(a => a.status === 'ACTIVE');
+                const aRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/adsets?fields=name,status,daily_budget,campaign_id,created_time,${insParams}&access_token=${tok}&limit=100`);
+                const aData = await aRes.json(); 
+                if(aData.error) throw new Error("[광고세트] " + aData.error.message);
+                state.adsets = (aData.data || []).filter(a => a.status === 'ACTIVE');
 
-                const adRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/ads?fields=name,status,adset_id,campaign_id,created_time,${insParams}&access_token=${tok}&limit=300`);
-                const adData = await adRes.json(); state.ads = (adData.data || []).filter(a => a.status === 'ACTIVE');
-
+                const adRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/ads?fields=name,status,adset_id,campaign_id,created_time,${insParams}&access_token=${tok}&limit=150`);
+                const adData = await adRes.json(); 
+                if(adData.error) throw new Error("[광고소재] " + adData.error.message);
+                state.ads = (adData.data || []).filter(a => a.status === 'ACTIVE');
                 // 2. 과거 1주일 Meta API 활동내역 복구 (하이브리드 엔진)
                 const curBudMap = {};
                 state.campaigns.forEach(c => curBudMap[c.id] = c.daily_budget ? parseInt(c.daily_budget) : 0);
@@ -957,10 +962,13 @@ function getEnergyBarHTML(ins) {
                     }
                 }, 100);
 
-            } catch (err) { showToast("API 연동 에러", "error");
-            } finally { document.getElementById('loadingStatus').classList.add('hidden'); document.getElementById('loadingStatus').classList.remove('flex'); }
-        }
-
+         } catch (err) { 
+                console.error(err);
+                showToast("API 에러: " + err.message, "error");
+            } finally { 
+                document.getElementById('loadingStatus').classList.add('hidden'); 
+                document.getElementById('loadingStatus').classList.remove('flex'); 
+            }
         function toggleDemoMode() {
             state.isDemo = !state.isDemo;
             if (state.isDemo) {
