@@ -745,37 +745,27 @@
             </div>`;
         }
         
-        function getEnergyBarHTML(ins) {
-            if(!ins || !ins.spend) return `<span class="text-xs text-slate-300">평가 불가</span>`;
+function getEnergyBarHTML(ins) {
+            if(!ins || !ins.spend) return `<div class="text-center w-full"><span class="text-[10px] text-slate-300">평가 불가</span></div>`;
+            
             const nrg = calculateEnergy(ins);
-            return `<div class="flex flex-col items-center w-full px-1"><div class="flex items-center gap-1 mb-1"><span class="text-base">${nrg.emoji}</span><span class="text-[9px] font-bold px-1 py-0.5 rounded ${nrg.color} whitespace-nowrap">${nrg.text}</span></div><div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden"><div class="energy-fill ${nrg.bar} h-1.5 rounded-full" style="width: ${nrg.score}%"></div></div></div>`;
-        }
-
-        // 글자 깨짐 방지 완벽 코팅 렌더링
-        function renderLogItem(log, index) {
-            const isUp = log.diff > 0;
-            const diffClass = isUp ? 'text-rose-600 bg-rose-50 border-rose-200' : 'text-blue-600 bg-blue-50 border-blue-200';
-            const diffAmount = Math.abs(log.diff).toLocaleString();
-            const diffFinalText = isUp ? `▲ +${diffAmount}원` : `▼ -${diffAmount}원`;
-            const totalText = (typeof log.budget === 'number' && log.budget > 0) ? `[총 ${log.budget.toLocaleString()}원]` : '';
-
+            const imp = ins.impressions ? parseInt(ins.impressions).toLocaleString() : '0';
+            const clk = ins.clicks ? parseInt(ins.clicks).toLocaleString() : '0';
+            
             return `
-                <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-sm w-full ${index > 0 ? 'opacity-70' : ''}">
-                    <div class="flex flex-col gap-1.5">
-                        <div class="flex items-start justify-between gap-2">
-                            <span class="text-[12px] font-extrabold px-2 py-0.5 rounded-lg border leading-tight ${diffClass}">${diffFinalText}</span>
-                            <span class="text-[10px] text-slate-400 font-mono whitespace-nowrap mt-0.5 shrink-0">${log.time}</span>
-                        </div>
-                        ${totalText ? `<span class="text-[10px] text-slate-400 font-mono pl-0.5">${totalText}</span>` : ''}
-                        <div class="flex items-center gap-1 text-[11px] text-slate-500 pl-0.5">
-                            <i data-lucide="user-check" class="w-3 h-3 text-emerald-500 shrink-0"></i>
-                            <strong class="truncate">${log.pic}</strong>
-                        </div>
+            <div class="flex flex-col w-full px-1 gap-1.5">
+                <div class="flex items-center gap-2 w-full">
+                    <span class="text-base shrink-0">${nrg.emoji}</span>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden flex-1 mt-0.5">
+                        <div class="energy-fill ${nrg.bar} h-1.5 rounded-full" style="width: ${nrg.score}%"></div>
                     </div>
                 </div>
-            `;
+                <div class="flex items-center justify-between">
+                    <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ${nrg.color} whitespace-nowrap">${nrg.text}</span>
+                    <span class="text-[9px] text-slate-400 font-mono tracking-tighter">노출:${imp} | 클릭:${clk}</span>
+                </div>
+            </div>`;
         }
-
         function getHistoryHTML(id) {
             const logs = state.historyLog[id];
             if(!logs || logs.length === 0) return `<span class="text-[10px] text-slate-300">- 변동 없음 -</span>`;
@@ -847,7 +837,7 @@
             
             try {
                 // 1. 현재 메타 예산 로드 (생성일자 추가)
-                const insParams = `insights.date_preset(${datePreset}){spend,action_values,actions,cpm,ctr,frequency}`;
+                const insParams = `insights.date_preset(${datePreset}){spend,action_values,actions,cpm,ctr,frequency,impressions,clicks}`;
                 const cRes = await fetch(`https://graph.facebook.com/v22.0/act_${acc}/campaigns?fields=name,status,daily_budget,created_time,${insParams}&access_token=${tok}&limit=100`);
                 const cData = await cRes.json(); if(cData.error) throw new Error(cData.error.message);
                 state.campaigns = (cData.data || []).filter(c => c.status === 'ACTIVE');
