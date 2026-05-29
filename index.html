@@ -289,14 +289,15 @@
             state.manualUrls = JSON.parse(localStorage.getItem('yomimon_v27_urls') || '{}');
             checkCloudStatus();
 
-            // ★ 자동 클라우드 복원 — 로컬에 baseline 데이터가 없을 때(새 컴퓨터 등)만 실행
+// ★ 자동 클라우드 복원 — 로컬에 baseline 데이터가 없을 때(새 컴퓨터 등)만 실행
             const isLocalEmpty = Object.keys(state.baseline).length === 0;
             if (isLocalEmpty) {
                 showToast("새 기기 감지 — 팀 클라우드에서 데이터 복원 중...", "info");
                 try {
                     const res = await fetch(TEAM_CLOUD_URL);
                     const data = await res.json();
-                    if (data && data.status === 'ok') {
+                    // [수정 완료] 엄격한 status 검증을 없애고, 데이터 객체 존재 여부로 통과시킴
+                    if (data && (data.baseline || data.historyLog || data.manualUrls)) {
                         if (data.baseline)   state.baseline   = data.baseline;
                         if (data.historyLog) state.historyLog = data.historyLog;
                         if (data.manualUrls) state.manualUrls = data.manualUrls;
@@ -348,14 +349,15 @@
             }
         }
 
-        // ================= 수동 클라우드 로직 =================
+// ================= 수동 클라우드 로직 =================
         async function restoreFromCloud() {
             const cloudUrl = document.getElementById('cloudUrl').value.trim() || TEAM_CLOUD_URL;
             if(!cloudUrl) { showToast("데이터센터 연결 URL을 먼저 기입해주세요.", "warning"); return; }
             showToast("클라우드 데이터를 불러오는 중...", "info");
             try {
                 const res = await fetch(cloudUrl); const data = await res.json();
-                if(data && data.status === 'ok') {
+                // [수정 완료] 엄격한 status 검증을 없애고, 데이터 객체 존재 여부로 통과시킴
+                if(data && (data.baseline || data.historyLog || data.manualUrls)) {
                     if(data.baseline) state.baseline = data.baseline;
                     if(data.historyLog) state.historyLog = data.historyLog;
                     if(data.manualUrls) state.manualUrls = data.manualUrls;
@@ -367,7 +369,7 @@
                 } else { showToast("클라우드에 저장된 데이터가 없습니다.", "warning"); }
             } catch(e) { showToast("클라우드 로드 실패", "error"); }
         }
-
+        
         // 구글 시트 엑셀화를 위해 데이터를 행/열(Array) 구조로 포장하는 함수
         function buildDbPayload() {
             const now = new Date().toLocaleString('ko-KR', { month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
